@@ -288,7 +288,7 @@ end = struct
   let interject_with ({ config = { ppf; _ }; rows; _ } as t) f =
     Format.fprintf ppf "%s%!" Terminal.Ansi.erase_line;
     for i = 1 to Vector.length rows - 1 do
-      Format.fprintf ppf "%s%a%!" Terminal.Ansi.move_up 1
+      Format.fprintf ppf "%a%s%!" Terminal.Ansi.move_up 1
         Terminal.Ansi.erase_line
     done;
     Fun.protect f ~finally:(fun () ->
