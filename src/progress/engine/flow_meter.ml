@@ -75,7 +75,8 @@ let per_second : type a. a t -> a =
     let interval =
       let start_time = t.timestamps.(oldest_index) in
       let end_time = t.timestamps.(t.most_recently_added) in
-      Mtime.Span.to_s (Mtime.span start_time end_time)
+      let span_ns = Mtime.Span.to_float_ns (Mtime.span start_time end_time) in
+      span_ns /. (10. ** 9.)
     in
     if Float.compare interval Float.epsilon < 0 then Integer.zero
     else
